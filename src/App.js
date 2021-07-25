@@ -1,25 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import './scss/main.scss';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
+import 'semantic-ui-css/semantic.min.css'
+import { Container } from 'semantic-ui-react'
 
-function App() {
+import { ToastContainer } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
+
+
+import Home from './pages/Home'
+import AddNews from './pages/AddNews'
+import NewsByCategory from './pages/NewsByCategory'
+import NewsView from './pages/NewsView'
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    <>
+      <Router>
+        <Switch>
+          <Container>
+           <Route exact path='/' component={Home} />
+           <Route exact path='/news/:category' component={NewsByCategory} />
 
-export default App;
+           <Route exact path='/addnews' component={AddNews} />
+
+           <Route exact path='/newsview/:id' component={NewsView} />
+
+
+           <ToastContainer />
+          </Container>
+        </Switch>
+      </Router>
+    </>
+  )
+}
